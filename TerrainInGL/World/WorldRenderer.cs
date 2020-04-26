@@ -1,29 +1,40 @@
 ﻿using OpenToolkit.Graphics.OpenGL4;
+using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
+using OrgPer.Entities;
+using OrgPer.Sprites;
 using System;
 using TerrainInGL.Shaders;
-using TerrainInGL.Shaders.VAO;
 
 namespace TerrainInGL.World
 {
     public class WorldRenderer : IDisposable
     {
         private Shader shader;
-
-        private SpriteVAO testSprite;
+        private Sprite testSprite;
 
         public WorldRenderer()
         {
+            //Might want to give the VAO's a pointer to a list of shader they can use instead of creating it here
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
-            testSprite = new SpriteVAO();
+            
+            //For testing only
+            testSprite = new Sprite();
         }
 
-        public void OnRenderFrame(FrameEventArgs args)
+        public void OnRenderFrame(Camera camera, FrameEventArgs args)
         {
             shader.Use();
-            testSprite.BindVAO();
-            GL.DrawElements(PrimitiveType.Triangles, testSprite.indices.Length, DrawElementsType.UnsignedInt, 0);
-            testSprite.UnbindVAO();
+
+            //Matrix
+            shader.SetMatrix4("view_matrix", camera.GetViewMatrix());
+            shader.SetMatrix4("projection_matrix", camera.GetProjectionMatrix());
+            shader.SetMatrix4("transformation_matrix", testSprite.GetTransformationMatrix());
+
+            //TODO move this all into the VAO class
+            testSprite.Model.BindVAO();
+            GL.DrawElements(PrimitiveType.Triangles, testSprite.Model.indices.Length, DrawElementsType.UnsignedInt, 0);
+            testSprite.Model.UnbindVAO();
         }
 
         public void Dispose()
@@ -36,7 +47,5 @@ namespace TerrainInGL.World
             testSprite.Dispose();
             GL.DeleteProgram(shader.Handle);
         }
-
-
     }
 }

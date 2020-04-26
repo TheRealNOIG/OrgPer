@@ -1,10 +1,11 @@
 ﻿using OpenToolkit.Graphics.OpenGL4;
-using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
 using OpenToolkit.Windowing.Desktop;
 using OpenToolkit.Windowing.GraphicsLibraryFramework;
+using OrgPer.Entities;
 using System;
 using System.ComponentModel;
+using TerrainInGL.Utils;
 using TerrainInGL.World;
 
 namespace TerrainInGL
@@ -13,6 +14,7 @@ namespace TerrainInGL
     {
         private float clearColor = 106f / 255f;
         private WorldRenderer worldRenderer;
+        private Camera camera;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
@@ -24,6 +26,8 @@ namespace TerrainInGL
             GLFWCallbacks.KeyCallback KeyEventDelegate = OnKeyEvent;
             GLFW.SetKeyCallback(WindowPtr, KeyEventDelegate);
 
+            camera = new Camera();
+
             worldRenderer = new WorldRenderer();
 
             GL.ClearColor(clearColor, clearColor, clearColor, 1f);
@@ -32,15 +36,16 @@ namespace TerrainInGL
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            worldRenderer.OnRenderFrame(args);
+            worldRenderer.OnRenderFrame(camera, args);
             SwapBuffers();
         }
 
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
             base.OnUpdateFrame(args);
+            camera.Update((float)args.Time);
         }
 
         protected override void OnClosing(CancelEventArgs e)

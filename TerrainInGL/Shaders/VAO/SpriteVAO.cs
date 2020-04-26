@@ -4,9 +4,8 @@ using System.Text;
 
 namespace TerrainInGL.Shaders.VAO
 {
-    class SpriteVAO : VAO
+    public class SpriteVAO : VAO
     {
-
         private readonly float[] testVertex =
         {
             0.5f, 0.5f, 0.0f,

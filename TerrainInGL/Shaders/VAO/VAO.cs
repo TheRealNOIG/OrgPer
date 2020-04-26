@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TerrainInGL.Shaders.VAO
 {
-    class VAO : IDisposable
+    public class VAO : IDisposable
     {
         public int ID { get; private set; }
         private List<int> vbos = new List<int>();

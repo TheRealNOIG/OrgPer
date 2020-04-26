@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace TerrainInGL
+namespace TerrainInGL.Utils
 {
     public static class KeyboardManager
     {
