@@ -7,14 +7,16 @@ using System;
 using System.ComponentModel;
 using TerrainInGL.Utils;
 using TerrainInGL.World;
+using System.Collections.Generic;
 
 namespace TerrainInGL
 {
     class Window : GameWindow
     {
         private float clearColor = 106f / 255f;
-        private WorldRenderer worldRenderer;
+        //private WorldRenderer worldRenderer;
         private Camera camera;
+        private List<IScreen> worldStack;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
         {
@@ -28,8 +30,18 @@ namespace TerrainInGL
 
             camera = new Camera();
 
-            worldRenderer = new WorldRenderer();
+            //stackless standalone
+            //worldRenderer = new WorldRenderer();
 
+            //test stack. contains single screen rn. gamescreen.
+            worldStack = new List<IScreen>();
+            worldStack.Add(new GameScreen());
+            foreach (var screen in worldStack)
+            {
+                screen.Load();
+            }
+            //for testing need to set only screen in list to active
+            worldStack[0].Active = true;
             GL.ClearColor(clearColor, clearColor, clearColor, 1f);
         }
 
@@ -37,8 +49,16 @@ namespace TerrainInGL
         {
             base.OnRenderFrame(args);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            worldRenderer.OnRenderFrame(camera, args);
+            //render standalone screen
+            //worldRenderer.OnRenderFrame(camera, args);
+            //render stack
+            foreach (var screen in worldStack)
+            {
+                if (screen.Active)
+                {
+                    screen.WorldRenderer.OnRenderFrame(camera, args);
+                }
+            }
             SwapBuffers();
         }
 
@@ -46,6 +66,10 @@ namespace TerrainInGL
         {
             base.OnUpdateFrame(args);
             camera.Update((float)args.Time);
+            //TEST disabling a screen in the stack
+            if(KeyboardManager.IsKeyPressed(Keys.Escape)){
+                worldStack[0].Active = !worldStack[0].Active;
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
