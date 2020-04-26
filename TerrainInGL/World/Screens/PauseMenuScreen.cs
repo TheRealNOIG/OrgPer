@@ -1,29 +1,36 @@
+using OpenToolkit.Graphics.OpenGL;
 using OpenToolkit.Windowing.Common;
 using OrgPer.Entities;
+using OrgPer.Sprites;
+using TerrainInGL.Shaders;
+using System.Collections.Generic;
 
-namespace TerrainInGL.World
-{
-   
-    public class PauseMenuScreen : IScreen
-    {
+namespace TerrainInGL.World {
+
+    public class PauseMenuScreen : IScreen {
         public bool Active { get; set; }
-        public void Load()
-        {
-           
-        }
-        public void Update()
-        {
+
+        private Shader shader;
+        private Sprite testSprite;
+        public List<Sprite> Sprites { get; set; }
+        public WorldRenderer WorldRenderer { get; set; }
+        public void Load () {
 
         }
-        public void Render(Camera camera, FrameEventArgs args)
-        {
+        public void Update () {
 
         }
-        public void Dispose()
-        {
+
+        public PauseMenuScreen () {
 
         }
-      
+        public void Render (Camera camera, FrameEventArgs args) {
+
+        }
+        public void Dispose () {
+
+        }
+
     }
-    
+
 }
