@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using OpenToolkit.Windowing.Common;
 using OrgPer.Entities;
-using OrgPer.Entities;
 using OrgPer.Sprites;
 
 namespace TerrainInGL.World {
