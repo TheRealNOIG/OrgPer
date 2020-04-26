@@ -31,6 +31,12 @@ namespace TerrainInGL
             worldRenderer = new WorldRenderer();
 
             GL.ClearColor(clearColor, clearColor, clearColor, 1f);
+
+            //TODO move to texture
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (float)All.Nearest);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (float)All.Nearest);
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)

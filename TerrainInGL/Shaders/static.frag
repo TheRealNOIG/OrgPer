@@ -1,8 +1,10 @@
 ﻿#version 330
 
-in vec3 color;
+uniform sampler2D sampler;
+
+in vec2 pass_textureCoords;
  
 void main(void)
 {
-  gl_FragColor = vec4(color, 1);
+  gl_FragColor = texture(sampler, pass_textureCoords);
 }
