@@ -36,11 +36,12 @@ namespace TerrainInGL
             //test stack. contains single screen rn. gamescreen.
             worldStack = new List<IScreen>();
             worldStack.Add(new GameScreen());
+            worldStack.Add(new PauseMenuScreen());
             foreach (var screen in worldStack)
             {
                 screen.Load();
             }
-            //for testing need to set only screen in list to active
+            //for testing need to set only first screen in list to active
             worldStack[0].Active = true;
             GL.ClearColor(clearColor, clearColor, clearColor, 1f);
         }
@@ -56,7 +57,7 @@ namespace TerrainInGL
             {
                 if (screen.Active)
                 {
-                    screen.WorldRenderer.OnRenderFrame(camera, args);
+                    screen.Render(camera, args);
                 }
             }
             SwapBuffers();
@@ -69,6 +70,7 @@ namespace TerrainInGL
             //TEST disabling a screen in the stack
             if(KeyboardManager.IsKeyPressed(Keys.Escape)){
                 worldStack[0].Active = !worldStack[0].Active;
+                worldStack[1].Active = !worldStack[1].Active;
             }
         }
 
