@@ -7,10 +7,8 @@ namespace TerrainInGL.World
     public class PauseMenuScreen : IScreen
     {
         public bool Active { get; set; }
-        public WorldRenderer WorldRenderer { get; set; }
         public void Load()
         {
-            WorldRenderer = new WorldRenderer();
            
         }
         public void Update()
@@ -19,7 +17,11 @@ namespace TerrainInGL.World
         }
         public void Render(Camera camera, FrameEventArgs args)
         {
-            
+
+        }
+        public void Dispose()
+        {
+
         }
       
     }
