@@ -12,7 +12,7 @@ namespace TerrainInGL.World
     public class WorldRenderer : IDisposable
     {
         private Shader shader;
-        private Sprite testSprite , testSprite2;
+        private Sprite testSprite , testSprite2, testSprite3;
 
         public WorldRenderer()
         {
@@ -22,7 +22,9 @@ namespace TerrainInGL.World
             //For testing only
             testSprite = new Sprite(ResourceManager.getTexture("testAtlis.png", 4, 4));
             testSprite2 = new Sprite(ResourceManager.getTexture("testAtlis.png", 6, 4));
+            testSprite3 = new Sprite(ResourceManager.getTexture("test.png"));
             testSprite.Location = new Vector3(-1f, 0, 0);
+            testSprite3.Location = new Vector3(-2f, 0, 0);
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
@@ -35,6 +37,7 @@ namespace TerrainInGL.World
 
             testSprite.Draw(shader);
             testSprite2.Draw(shader);
+            testSprite3.Draw(shader);
         }
 
         public void Dispose()
@@ -45,7 +48,8 @@ namespace TerrainInGL.World
             GL.BindVertexArray(0);
 
             testSprite.Dispose();
-            testSprite.Dispose();
+            testSprite2.Dispose();
+            testSprite3.Dispose();
             GL.DeleteProgram(shader.Handle);
         }
     }
