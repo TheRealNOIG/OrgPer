@@ -30,17 +30,16 @@ namespace TerrainInGL.Shaders.VAO
 
         private Texture texture;
 
-        public SpriteVAO(string texturePath)
+        public SpriteVAO(Texture texture)
         {
             CreateVAO();
             StoreElement(indices);
             StoreArrayInAttributeList(0, 3, vertices);
             StoreArrayInAttributeList(1, 2, textureCoords);
             UnbindVAO();
-            texture = new Texture(texturePath);
+            this.texture = texture;
         }
 
-        //TODO might want to move this to the sprite class to allow them to choose how they are rendered
         public void Draw()
         {
             BindVAO();
