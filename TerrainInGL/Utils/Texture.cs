@@ -11,8 +11,8 @@ namespace OrgPer.Utils
     {
         public int Handle { get; private set; }
 
-        public readonly int Index = 0;
-        public readonly int NumberOfRows = 1;
+        public int Index = 0;
+        public int NumberOfRows = 1;
 
         public Texture(string path)
         {

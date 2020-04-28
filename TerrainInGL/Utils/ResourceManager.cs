@@ -20,6 +20,11 @@ namespace OrgPer.Utils
         {
             if (!textures.ContainsKey(textureName))
                 textures.Add(textureName, new Texture($"{texturePath}{textureName}", index, numberOfRows));
+            else
+            {
+                textures[textureName].Index = index;
+                textures[textureName].NumberOfRows = numberOfRows;
+            }
             return textures[textureName];
         }
         #endregion
