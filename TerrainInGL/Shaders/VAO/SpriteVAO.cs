@@ -44,6 +44,7 @@ namespace TerrainInGL.Shaders.VAO
         public void Draw()
         {
             BindVAO();
+            texture.Use();
             GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
             UnbindVAO();
         }
