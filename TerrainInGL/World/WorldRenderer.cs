@@ -19,7 +19,7 @@ namespace TerrainInGL.World
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
             
             //For testing only
-            testSprite = new Sprite();
+            testSprite = new Sprite("OrgPer.Textures.test.png");
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
@@ -31,10 +31,7 @@ namespace TerrainInGL.World
             shader.SetMatrix4("projection_matrix", camera.GetProjectionMatrix());
             shader.SetMatrix4("transformation_matrix", testSprite.GetTransformationMatrix());
 
-            //TODO move this all into the VAO class
-            testSprite.Model.BindVAO();
-            GL.DrawElements(PrimitiveType.Triangles, testSprite.Model.indices.Length, DrawElementsType.UnsignedInt, 0);
-            testSprite.Model.UnbindVAO();
+            testSprite.Draw();
         }
 
         public void Dispose()

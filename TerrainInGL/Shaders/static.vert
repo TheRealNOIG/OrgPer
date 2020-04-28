@@ -5,7 +5,7 @@ uniform mat4 view_matrix;
 uniform mat4 transformation_matrix;
 
 layout(location = 0) in vec3 position;
-layout(location = 0) in vec2 textureCoords;
+layout(location = 1) in vec2 textureCoords;
 
 out vec2 pass_textureCoords;
  

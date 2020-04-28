@@ -1,4 +1,6 @@
 ﻿using OpenToolkit.Graphics.OpenGL4;
+using OrgPer.Utils;
+using System;
 
 namespace TerrainInGL.Shaders.VAO
 {
@@ -14,10 +16,10 @@ namespace TerrainInGL.Shaders.VAO
 
         private readonly float[] textureCoords = 
         {
-            0, 0,
-            0, 1,
             1, 1,
-            1, 0
+            1, 0,
+            0, 0,
+            0, 1
         };
 
         public readonly uint[] indices =
@@ -26,36 +28,41 @@ namespace TerrainInGL.Shaders.VAO
             1, 2, 3
         };
 
-        //TODO create texture class and load in from png
-        private  byte[] texture = new byte[64 * 32 * 4];
-        private int textureHandle;
+        private Texture texture;
 
-        public SpriteVAO()
+        public SpriteVAO(string texturePath)
         {
             CreateVAO();
             StoreElement(indices);
             StoreArrayInAttributeList(0, 3, vertices);
             StoreArrayInAttributeList(1, 2, textureCoords);
             UnbindVAO();
+            texture = new Texture(texturePath);
+        }
 
+        //TODO might want to move this to the sprite class to allow them to choose how they are rendered
+        public void Draw()
+        {
+            BindVAO();
+            GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
+            UnbindVAO();
+        }
 
+        public override void BindVAO()
+        {
+            base.BindVAO();
+            GL.ActiveTexture(TextureUnit.Texture0);
+        }
 
-            //Create test texture
+        public override void UnbindVAO()
+        {
+            base.UnbindVAO();
+        }
 
-            textureHandle = GL.GenTexture();
-            GL.BindTexture(TextureTarget.Texture2D, textureHandle);
-
-            for (int i = 0; i < 64 * 32; i++)
-            {
-                int _i = i * 4;
-
-                texture[_i + 0] = 255; // R
-                texture[_i + 1] = 255; // G
-                texture[_i + 2] = 255; // B
-                texture[_i + 3] = 255; // A
-            }
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, 64, 32, 0, PixelFormat.Rgba, PixelType.UnsignedByte, texture);
-
+        public override void Dispose()
+        {
+            base.Dispose();
+            GL.DeleteTexture(texture.Handle);
         }
     }
 }

@@ -17,12 +17,12 @@ namespace TerrainInGL.Shaders.VAO
             GL.BindVertexArray(ID);
         }
 
-        public void BindVAO()
+        public virtual void BindVAO()
         {
             GL.BindVertexArray(ID);
         }
 
-        public void UnbindVAO()
+        public virtual void UnbindVAO()
         {
             GL.BindVertexArray(0);
         }
@@ -46,7 +46,7 @@ namespace TerrainInGL.Shaders.VAO
             GL.BufferData(BufferTarget.ElementArrayBuffer, buffer.Length * sizeof(uint), buffer, BufferUsageHint.StaticDraw);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             vbos.ForEach(vbo => GL.DeleteBuffer(vbo));
             vbos.Clear();

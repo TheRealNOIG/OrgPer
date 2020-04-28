@@ -11,14 +11,19 @@ namespace OrgPer.Sprites
         public Vector3 Location;
         public SpriteVAO Model;
 
-        public Sprite()
+        public Sprite(string texturePath)
         {
-            Model = new SpriteVAO();
+            Model = new SpriteVAO(texturePath);
         }
 
         public Matrix4 GetTransformationMatrix()
         {
             return Maths.CreateTransformationMatrix(this);
+        }
+
+        public void Draw()
+        {
+            Model.Draw();
         }
 
         public void Dispose()

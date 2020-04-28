@@ -12,11 +12,13 @@
   <ItemGroup>
     <None Remove="Shaders\static.frag" />
     <None Remove="Shaders\static.vert" />
+    <None Remove="Textures\test.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Shaders\static.frag" />
     <EmbeddedResource Include="Shaders\static.vert" />
+    <EmbeddedResource Include="Textures\test.png" />
   </ItemGroup>
 
   <ItemGroup>
