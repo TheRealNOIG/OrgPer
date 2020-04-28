@@ -16,6 +16,12 @@ namespace OrgPer.Utils
                 textures.Add(textureName, new Texture($"{texturePath}{textureName}"));
             return textures[textureName];
         }
+        public static Texture getTexture(string textureName,int index, int numberOfRows)
+        {
+            if (!textures.ContainsKey(textureName))
+                textures.Add(textureName, new Texture($"{texturePath}{textureName}", index, numberOfRows));
+            return textures[textureName];
+        }
         #endregion
     }
 }

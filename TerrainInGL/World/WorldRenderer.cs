@@ -20,7 +20,7 @@ namespace TerrainInGL.World
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
             
             //For testing only
-            testSprite = new Sprite(ResourceManager.getTexture("test.png"));
+            testSprite = new Sprite(ResourceManager.getTexture("testAtlis.png", 4, 4));
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
@@ -32,7 +32,7 @@ namespace TerrainInGL.World
             shader.SetMatrix4("projection_matrix", camera.GetProjectionMatrix());
             shader.SetMatrix4("transformation_matrix", testSprite.GetTransformationMatrix());
 
-            testSprite.Draw();
+            testSprite.Draw(shader);
         }
 
         public void Dispose()

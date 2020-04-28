@@ -40,8 +40,11 @@ namespace TerrainInGL.Shaders.VAO
             this.texture = texture;
         }
 
-        public void Draw()
+        public void Draw(Shader shader)
         {
+            shader.SetFloat("number_of_rows", texture.NumberOfRows);
+            shader.SetVector2("offset", new OpenToolkit.Mathematics.Vector2(texture.GetXOffset(), texture.GetYOffset()));
+
             BindVAO();
             texture.Use();
             GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);

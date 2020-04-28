@@ -9,9 +9,24 @@ namespace OrgPer.Utils
 {
     public class Texture
     {
-        public readonly int Handle;
+        public int Handle { get; private set; }
+
+        public readonly int Index = 0;
+        public readonly int NumberOfRows = 1;
 
         public Texture(string path)
+        {
+            SetupTexture(path);
+        }
+
+        public Texture(string path, int index, int numberOfRows)
+        {
+            Index = index;
+            NumberOfRows = numberOfRows;
+            SetupTexture(path);
+        }
+
+        private void SetupTexture(string path)
         {
             //Creates the texture on the GPU
             Handle = GL.GenTexture();
@@ -49,6 +64,17 @@ namespace OrgPer.Utils
         {
             GL.ActiveTexture(unit);
             GL.BindTexture(TextureTarget.Texture2D, Handle);
+        }
+
+        public float GetXOffset()
+        {
+            int col = Index % NumberOfRows;
+            return (float)col / (float)NumberOfRows;
+        }
+        public float GetYOffset()
+        {
+            int row = Index / NumberOfRows;
+            return (float)row / (float)NumberOfRows;
         }
     }
 }
