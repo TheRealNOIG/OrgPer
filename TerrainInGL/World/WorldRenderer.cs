@@ -3,6 +3,7 @@ using OpenToolkit.Mathematics;
 using OpenToolkit.Windowing.Common;
 using OrgPer.Entities;
 using OrgPer.Sprites;
+using OrgPer.Utils;
 using System;
 using TerrainInGL.Shaders;
 
@@ -19,7 +20,7 @@ namespace TerrainInGL.World
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
             
             //For testing only
-            testSprite = new Sprite("OrgPer.Textures.test.png");
+            testSprite = new Sprite(ResourceManager.getTexture("test.png"));
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
