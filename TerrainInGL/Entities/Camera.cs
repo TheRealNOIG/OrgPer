@@ -48,9 +48,9 @@ namespace OrgPer.Entities
                 position.Y += deltaSpeed;
 
             if (KeyboardManager.IsKeyDown(Keys.Q))
-                yaw -= deltaSpeed;
+                yaw -= deltaSpeed * 5;
             if (KeyboardManager.IsKeyDown(Keys.E))
-                yaw += deltaSpeed;
+                yaw += deltaSpeed * 5;
         }
 
         public void IncreasePosition(float x, float z, float y)
