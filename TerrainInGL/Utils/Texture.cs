@@ -18,12 +18,22 @@ namespace OrgPer.Utils
         {
             SetupTexture(path);
         }
+        public Texture(int handle)
+        {
+            Handle = handle;
+        }
 
         public Texture(string path, int index, int numberOfRows)
         {
             Index = index;
             NumberOfRows = numberOfRows;
             SetupTexture(path);
+        }
+        public Texture(int handle, int index, int numberOfRows)
+        {
+            Index = index;
+            NumberOfRows = numberOfRows;
+            this.Handle = handle;
         }
 
         private void SetupTexture(string path)

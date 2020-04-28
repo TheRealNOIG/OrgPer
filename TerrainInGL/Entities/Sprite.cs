@@ -24,6 +24,7 @@ namespace OrgPer.Sprites
 
         public void Draw(Shader shader)
         {
+            shader.SetMatrix4("transformation_matrix", GetTransformationMatrix());
             Model.Draw(shader);
         }
 
