@@ -12,15 +12,19 @@ namespace TerrainInGL.World
     public class WorldRenderer : IDisposable
     {
         private Shader shader;
-        private Sprite testSprite;
+        private Sprite testSprite , testSprite2, testSprite3;
 
         public WorldRenderer()
         {
             //Might want to give the VAO's a pointer to a list of shader they can use instead of creating it here
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
-            
+
             //For testing only
-            testSprite = new Sprite(ResourceManager.getTexture("test.png"));
+            testSprite = new Sprite(ResourceManager.getTexture("testAtlis.png", 4, 4));
+            testSprite2 = new Sprite(ResourceManager.getTexture("testAtlis.png", 6, 4));
+            testSprite3 = new Sprite(ResourceManager.getTexture("test.png"));
+            testSprite.Location = new Vector3(-1f, 0, 0);
+            testSprite3.Location = new Vector3(-2f, 0, 0);
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
@@ -30,9 +34,10 @@ namespace TerrainInGL.World
             //Matrix
             shader.SetMatrix4("view_matrix", camera.GetViewMatrix());
             shader.SetMatrix4("projection_matrix", camera.GetProjectionMatrix());
-            shader.SetMatrix4("transformation_matrix", testSprite.GetTransformationMatrix());
 
-            testSprite.Draw();
+            testSprite.Draw(shader);
+            testSprite2.Draw(shader);
+            testSprite3.Draw(shader);
         }
 
         public void Dispose()
@@ -43,6 +48,8 @@ namespace TerrainInGL.World
             GL.BindVertexArray(0);
 
             testSprite.Dispose();
+            testSprite2.Dispose();
+            testSprite3.Dispose();
             GL.DeleteProgram(shader.Handle);
         }
     }
