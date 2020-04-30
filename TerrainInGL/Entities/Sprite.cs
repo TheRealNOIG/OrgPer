@@ -1,6 +1,7 @@
 ﻿using OpenToolkit.Mathematics;
 using OrgPer.Utils;
 using System;
+using TerrainInGL.Shaders;
 using TerrainInGL.Shaders.VAO;
 
 namespace OrgPer.Sprites
@@ -21,9 +22,10 @@ namespace OrgPer.Sprites
             return Maths.CreateTransformationMatrix(this);
         }
 
-        public void Draw()
+        public void Draw(Shader shader)
         {
-            Model.Draw();
+            shader.SetMatrix4("transformation_matrix", GetTransformationMatrix());
+            Model.Draw(shader);
         }
 
         public void Dispose()
