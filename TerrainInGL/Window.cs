@@ -36,6 +36,7 @@ namespace TerrainInGL
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
+            GL.Enable(EnableCap.DepthTest);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             worldRenderer.OnRenderFrame(camera, args);

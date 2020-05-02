@@ -14,7 +14,7 @@ namespace TerrainInGL.Shaders.VAO
             -0.5f, 0.5f, 0.0f
         };
 
-        private readonly float[] textureCoords = 
+        private readonly float[] textureCoords =
         {
             1, 1,
             1, 0,
@@ -22,13 +22,13 @@ namespace TerrainInGL.Shaders.VAO
             0, 1
         };
 
-        public readonly uint[] indices =
+        private readonly uint[] indices =
         {
             0, 1, 3,
             1, 2, 3
         };
 
-        private Texture texture;
+        public Texture? texture;
 
         public SpriteVAO(Texture texture)
         {
@@ -40,12 +40,25 @@ namespace TerrainInGL.Shaders.VAO
             this.texture = texture;
         }
 
+        public SpriteVAO()
+        {
+            CreateVAO();
+            StoreElement(indices);
+            StoreArrayInAttributeList(0, 3, vertices);
+            StoreArrayInAttributeList(1, 2, textureCoords);
+            UnbindVAO();
+        }
+
         public void Draw(Shader shader)
         {
             shader.SetFloat("number_of_rows", texture.NumberOfRows);
             shader.SetVector2("offset", new OpenToolkit.Mathematics.Vector2(texture.GetXOffset(), texture.GetYOffset()));
 
-            texture.Use();
+            GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
+        }
+
+        public void DrawWithoutTexture()
+        {
             GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);
         }
 
@@ -63,7 +76,7 @@ namespace TerrainInGL.Shaders.VAO
         public override void Dispose()
         {
             base.Dispose();
-            GL.DeleteTexture(texture.Handle);
+            texture?.Dispose();
         }
     }
 }

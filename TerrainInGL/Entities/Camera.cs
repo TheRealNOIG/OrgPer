@@ -34,22 +34,26 @@ namespace OrgPer.Entities
             //FOR TESTING ONLY
             if (KeyboardManager.IsKeyDown(Keys.W))
             {
-                IncreasePosition(rdx, rdz);
+                position.Y -= deltaSpeed;
             }
             if (KeyboardManager.IsKeyDown(Keys.S))
-                IncreasePosition(-rdx, -rdz); ;
+                position.Y += deltaSpeed;
             if (KeyboardManager.IsKeyDown(Keys.A))
                 IncreasePosition(dx, dz);
             if (KeyboardManager.IsKeyDown(Keys.D))
                 IncreasePosition(-dx, -dz); ;
             if (KeyboardManager.IsKeyDown(Keys.Space))
-                position.Y -= deltaSpeed;
+                IncreasePosition(-rdx, -rdz);
             if (KeyboardManager.IsKeyDown(Keys.LeftShift))
-                position.Y += deltaSpeed;
+                IncreasePosition(rdx, rdz);
 
             if (KeyboardManager.IsKeyDown(Keys.Q))
-                yaw -= deltaSpeed * 5;
+                pitch -= deltaSpeed * 5;
             if (KeyboardManager.IsKeyDown(Keys.E))
+                pitch += deltaSpeed * 5;
+            if (KeyboardManager.IsKeyDown(Keys.R))
+                yaw -= deltaSpeed * 5;
+            if (KeyboardManager.IsKeyDown(Keys.F))
                 yaw += deltaSpeed * 5;
         }
 

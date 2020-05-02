@@ -14,23 +14,17 @@ namespace TerrainInGL.World
     public class WorldRenderer : IDisposable
     {
         private Shader shader;
-        private Sprite testSprite , testSprite2, testSprite3;
         private Dictionary<SpriteVAO, List<Sprite>> spriteDictionary = new Dictionary<SpriteVAO, List<Sprite>>();
+        private WorldGrid worldGrid;
 
         public WorldRenderer()
         {
             //Might want to give the VAO's a pointer to a list of shader they can use instead of creating it here
             shader = new Shader("OrgPer.Shaders.static.vert", "OrgPer.Shaders.static.frag");
 
+            worldGrid = new WorldGrid(10, 10, 8, ResourceManager.getTexture("testAtlis.png", 0, 4));
+
             //For testing only
-            testSprite = new Sprite(ResourceManager.getTexture("testAtlis.png", 4, 4));
-            testSprite2 = new Sprite(ResourceManager.getTexture("testAtlis.png", 6, 4));
-            testSprite3 = new Sprite(ResourceManager.getTexture("test.png"));
-            testSprite.Location = new Vector3(-1f, 0, 0);
-            testSprite3.Location = new Vector3(-2f, 0, 0);
-            AddSprite(testSprite);
-            AddSprite(testSprite2);
-            AddSprite(testSprite3);
         }
 
         public void OnRenderFrame(Camera camera, FrameEventArgs args)
@@ -41,12 +35,15 @@ namespace TerrainInGL.World
             shader.SetMatrix4("view_matrix", camera.GetViewMatrix());
             shader.SetMatrix4("projection_matrix", camera.GetProjectionMatrix());
 
+            worldGrid.Draw(shader);
+
             foreach (KeyValuePair<SpriteVAO, List<Sprite>> item in spriteDictionary)
             {
                 SpriteVAO model = item.Key;
                 model.BindVAO();
                 foreach (Sprite sprite in item.Value)
                 {
+                    model.texture.Use();
                     sprite.Draw(shader);
                 }
                 model.UnbindVAO();
@@ -60,9 +57,6 @@ namespace TerrainInGL.World
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.BindVertexArray(0);
 
-            testSprite.Dispose();
-            testSprite2.Dispose();
-            testSprite3.Dispose();
             GL.DeleteProgram(shader.Handle);
         }
 

@@ -24,10 +24,14 @@ namespace OrgPer.Utils
 
         public static Matrix4 CreateTransformationMatrix(Sprite sprite)
         {
-            Matrix4 x = Matrix4.CreateRotationX(sprite.Rotation.X);
-            Matrix4 y = Matrix4.CreateRotationY(sprite.Rotation.Y);
-            Matrix4 z = Matrix4.CreateRotationZ(sprite.Rotation.Z);
-            Matrix4 translation = Matrix4.CreateTranslation(sprite.Location);
+            return CreateTransformationMatrix(sprite.Rotation, sprite.Location);
+        }
+        public static Matrix4 CreateTransformationMatrix(Vector3 rotation, Vector3 location)
+        {
+            Matrix4 x = Matrix4.CreateRotationX(toRadinas(rotation.X));
+            Matrix4 y = Matrix4.CreateRotationY(toRadinas(rotation.Y));
+            Matrix4 z = Matrix4.CreateRotationZ(toRadinas(rotation.Z));
+            Matrix4 translation = Matrix4.CreateTranslation(location);
             return (x * y * z * translation);
         }
 

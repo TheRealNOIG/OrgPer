@@ -1,4 +1,5 @@
 ﻿using OpenToolkit.Graphics.OpenGL4;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -7,7 +8,7 @@ using PixelFormat = OpenToolkit.Graphics.OpenGL4.PixelFormat;
 
 namespace OrgPer.Utils
 {
-    public class Texture
+    public class Texture : IDisposable
     {
         public int Handle { get; private set; }
 
@@ -21,6 +22,12 @@ namespace OrgPer.Utils
         public Texture(int handle)
         {
             Handle = handle;
+        }
+
+        public Texture(int index, int numberOfRows)
+        {
+            this.Index = index;
+            this.NumberOfRows = numberOfRows;
         }
 
         public Texture(string path, int index, int numberOfRows)
@@ -85,6 +92,22 @@ namespace OrgPer.Utils
         {
             int row = Index / NumberOfRows;
             return (float)row / (float)NumberOfRows;
+        }
+
+        public float GetXOffset(int index)
+        {
+            int col = index % NumberOfRows;
+            return (float)col / (float)NumberOfRows;
+        }
+        public float GetYOffset(int index)
+        {
+            int row = index / NumberOfRows;
+            return (float)row / (float)NumberOfRows;
+        }
+
+        public void Dispose()
+        {
+            GL.DeleteTexture(Handle);
         }
     }
 }
