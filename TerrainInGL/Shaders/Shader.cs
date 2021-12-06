@@ -1,8 +1,8 @@
-﻿using OpenToolkit.Graphics.OpenGL4;
-using OpenToolkit.Mathematics;
+﻿using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenTK.Graphics.OpenGL4;
 
 namespace TerrainInGL.Shaders
 {

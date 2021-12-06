@@ -1,4 +1,4 @@
-﻿using OpenToolkit.Windowing.Desktop;
+﻿using OpenTK.Windowing.Desktop;
 
 namespace TerrainInGL
 {
@@ -8,7 +8,7 @@ namespace TerrainInGL
         {
             var windowSettings = new NativeWindowSettings()
             {
-                Size = new OpenToolkit.Mathematics.Vector2i(1024, 720),
+                Size = new OpenTK.Mathematics.Vector2i(1024, 720),
                 Title = "Hello World!",
                 AutoLoadBindings = true
 

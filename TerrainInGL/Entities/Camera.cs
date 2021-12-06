@@ -1,5 +1,5 @@
-﻿using OpenToolkit.Mathematics;
-using OpenToolkit.Windowing.GraphicsLibraryFramework;
+﻿using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using OrgPer.Utils;
 using System;
 using TerrainInGL.Utils;

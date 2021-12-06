@@ -1,4 +1,4 @@
-﻿using OpenToolkit.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL4;
 using OrgPer.Utils;
 using System;
 
@@ -43,7 +43,7 @@ namespace TerrainInGL.Shaders.VAO
         public void Draw(Shader shader)
         {
             shader.SetFloat("number_of_rows", texture.NumberOfRows);
-            shader.SetVector2("offset", new OpenToolkit.Mathematics.Vector2(texture.GetXOffset(), texture.GetYOffset()));
+            shader.SetVector2("offset", new OpenTK.Mathematics.Vector2(texture.GetXOffset(), texture.GetYOffset()));
 
             texture.Use();
             GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);

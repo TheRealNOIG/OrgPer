@@ -1,9 +1,9 @@
-﻿using OpenToolkit.Graphics.OpenGL4;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
-using PixelFormat = OpenToolkit.Graphics.OpenGL4.PixelFormat;
+using OpenTK.Graphics.OpenGL4;
+using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
 
 namespace OrgPer.Utils
 {
