@@ -1,9 +1,8 @@
-﻿using OpenTK.Graphics.OpenGL4;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using OpenTK.Graphics.OpenGL4;
 
-namespace TerrainInGL.Shaders.VAO
+namespace OrgPer.Shaders.VAO
 {
     public class VAO : IDisposable
     {

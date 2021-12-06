@@ -43,9 +43,9 @@ namespace OrgPer.Utils
             Use();
 
             //Load Embeded texture
-            Assembly myAssembly = Assembly.GetExecutingAssembly();
-            Stream myStream = myAssembly.GetManifestResourceStream(path);
-            Bitmap bmp = new Bitmap(myStream);
+            var myAssembly = Assembly.GetExecutingAssembly();
+            var myStream = myAssembly.GetManifestResourceStream(path);
+            var bmp = new Bitmap(myStream);
 
             //Create image data to pass to the GPU
             /*using MemoryStream ms = new MemoryStream();
@@ -78,12 +78,12 @@ namespace OrgPer.Utils
 
         public float GetXOffset()
         {
-            int col = Index % NumberOfRows;
+            var col = Index % NumberOfRows;
             return (float)col / (float)NumberOfRows;
         }
         public float GetYOffset()
         {
-            int row = Index / NumberOfRows;
+            var row = Index / NumberOfRows;
             return (float)row / (float)NumberOfRows;
         }
     }

@@ -1,26 +1,19 @@
 ﻿using OpenTK.Windowing.Desktop;
+using OrgPer;
 
-namespace TerrainInGL
+
+var windowSettings = new NativeWindowSettings()
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var windowSettings = new NativeWindowSettings()
-            {
-                Size = new OpenTK.Mathematics.Vector2i(1024, 720),
-                Title = "Hello World!",
-                AutoLoadBindings = true
+    Size = new OpenTK.Mathematics.Vector2i(1024, 720),
+    Title = "Hello World!",
+    AutoLoadBindings = true
 
-            };
+};
 
-            var gameWindowSettings = new GameWindowSettings()
-            {
-                UpdateFrequency = 144,
-                RenderFrequency = 144
-            };
+var gameWindowSettings = new GameWindowSettings()
+{
+    UpdateFrequency = 144,
+    RenderFrequency = 144
+};
 
-            new Window(gameWindowSettings, windowSettings);
-        }
-    }
-}
+new Window(gameWindowSettings, windowSettings);

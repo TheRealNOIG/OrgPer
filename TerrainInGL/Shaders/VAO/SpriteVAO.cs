@@ -1,8 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL4;
 using OrgPer.Utils;
-using System;
 
-namespace TerrainInGL.Shaders.VAO
+namespace OrgPer.Shaders.VAO
 {
     public class SpriteVAO : VAO
     {

@@ -2,7 +2,6 @@
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OrgPer.Utils;
 using System;
-using TerrainInGL.Utils;
 
 namespace OrgPer.Entities
 {
@@ -25,10 +24,10 @@ namespace OrgPer.Entities
         public void Update(float delta)
         {
             float deltaSpeed = speed;
-            var dx = (float)(deltaSpeed * Math.Cos(Maths.toRadinas(yaw)));
-            var dz = (float)(deltaSpeed * Math.Sin(Maths.toRadinas(yaw)));
-            var rdx = (float)(deltaSpeed * Math.Cos(Maths.toRadinas(yaw + 90)));
-            var rdz = (float)(deltaSpeed * Math.Sin(Maths.toRadinas(yaw + 90)));
+            var dx = (float)(deltaSpeed * Math.Cos(Maths.ToRadians(yaw)));
+            var dz = (float)(deltaSpeed * Math.Sin(Maths.ToRadians(yaw)));
+            var rdx = (float)(deltaSpeed * Math.Cos(Maths.ToRadians(yaw + 90)));
+            var rdz = (float)(deltaSpeed * Math.Sin(Maths.ToRadians(yaw + 90)));
 
 
             //FOR TESTING ONLY

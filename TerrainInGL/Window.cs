@@ -1,14 +1,14 @@
-﻿using OpenTK.Windowing.Common;
+﻿using System.ComponentModel;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OrgPer.Entities;
-using System.ComponentModel;
-using OpenTK.Graphics.OpenGL;
-using TerrainInGL.Utils;
+using OrgPer.Utils;
 
-namespace TerrainInGL
+namespace OrgPer
 {
-    class Window : GameWindow
+    public sealed class Window : GameWindow
     {
         private float clearColor = 106f / 255f;
         private Camera camera;
@@ -18,10 +18,10 @@ namespace TerrainInGL
             Run();
         }
 
-        protected unsafe override void OnLoad()
+        protected override unsafe void OnLoad()
         {
-            GLFWCallbacks.KeyCallback KeyEventDelegate = OnKeyEvent;
-            GLFW.SetKeyCallback(WindowPtr, KeyEventDelegate);
+            GLFWCallbacks.KeyCallback keyEventDelegate = OnKeyEvent;
+            GLFW.SetKeyCallback(WindowPtr, keyEventDelegate);
 
             camera = new Camera();
 

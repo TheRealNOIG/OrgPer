@@ -1,10 +1,10 @@
-﻿using OpenTK.Mathematics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
-namespace TerrainInGL.Shaders
+namespace OrgPer.Shaders
 {
     // A simple class meant to help create shaders.
     public class Shader

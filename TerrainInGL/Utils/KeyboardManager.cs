@@ -1,9 +1,8 @@
-﻿using OpenTK.Windowing.GraphicsLibraryFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Threading;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace TerrainInGL.Utils
+namespace OrgPer.Utils
 {
     public static class KeyboardManager
     {
@@ -20,15 +19,24 @@ namespace TerrainInGL.Utils
         public static void OnKeyEvent(Keys key, InputAction action, KeyModifiers mods)
         {
             Console.WriteLine($"Key: {key} | Action {action} | KeyModifier {mods} | Time {DateTime.Now.Second}.{DateTime.Now.Millisecond}");
-            if (action == InputAction.Press)
+            switch (action)
             {
-                if (!keysDown.Contains(key)) keysDown.Add(key);
-                if (keysDown.Contains(key) && !keysPressed.Contains(key)) keysPressed.Add(key);
-            }
-            if (action == InputAction.Release)
-            {
-                if (keysDown.Contains(key)) keysDown.Remove(key);
-                if (keysPressed.Contains(key)) keysPressed.Remove(key);
+                case InputAction.Press:
+                {
+                    if (!keysDown.Contains(key)) keysDown.Add(key);
+                    if (keysDown.Contains(key) && !keysPressed.Contains(key)) keysPressed.Add(key);
+                    break;
+                }
+                case InputAction.Release:
+                {
+                    if (keysDown.Contains(key)) keysDown.Remove(key);
+                    if (keysPressed.Contains(key)) keysPressed.Remove(key);
+                    break;
+                }
+                case InputAction.Repeat:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(action), action, null);
             }
 
             if (keyEventReturnList.ContainsKey(key)) keyEventReturnList[key].ForEach(x => x(key, action, mods));
@@ -58,17 +66,14 @@ namespace TerrainInGL.Utils
 
         public static bool IsKeyDown(Keys key)
         {
-            if (keysDown.Contains(key)) return true;
-            return false;
+            return keysDown.Contains(key);
         }
         public static bool IsKeyPressed(Keys key)
         {
-            if (keysPressed.Contains(key))
-            {
-                keysPressed.Remove(key);
-                return true;
-            }
-            return false;
+            if (!keysPressed.Contains(key)) return false;
+            
+            keysPressed.Remove(key);
+            return true;
         }
     }
 }
